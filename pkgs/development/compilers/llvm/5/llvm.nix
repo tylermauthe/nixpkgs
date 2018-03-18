@@ -148,7 +148,9 @@ in stdenv.mkDerivation (rec {
     ln -s $lib/lib/libLLVM.dylib $lib/lib/libLLVM-${release_version}.dylib
   '';
 
-  doCheck = stdenv.isLinux && (!stdenv.isi686);
+  doCheck = stdenv.isLinux && (!stdenv.isi686)
+    # https://bugs.llvm.org/show_bug.cgi?id=36786, hopefully temporary!
+    && false;
 
   checkTarget = "check-all";
 
